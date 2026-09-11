@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>DRUG FLY — $DRUGFLY</title>
+<meta name="description" content="the only fly in the tent who works. he pollinates every bush himself, so the harvest is his.">
+<link rel="icon" href="f-favicon.png">
+<meta property="og:title" content="DRUG FLY — $DRUGFLY">
+<meta property="og:description" content="he pollinates every bush in unit 04 personally, then sells what grows out of it.">
+<meta property="og:image" content="f-full.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050c07; --ink:#03120a; --panel:#0b1a0f;
+  --lime:#8dff3a; --lime2:#c9ff8a; --mag:#ff3ce0; --vio:#a63cff;
+  --cream:#f2ffe6; --amber:#ffc93c; --dim:#7d9a77;
+  --edge:rgba(141,255,58,.22);
+}
+*{box-sizing:border-box}
+html{overflow-x:clip; background:var(--bg); scroll-behavior:smooth}
+body{
+  margin:0; background:transparent; color:var(--cream);
+  font-family:"Space Grotesk",system-ui,sans-serif; font-size:16px; line-height:1.55;
+  -webkit-font-smoothing:antialiased; overflow-x:clip;
+}
+img{max-width:100%; display:block}
+a{color:inherit}
+h1,h2,h3{margin:0}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+
+/* ---------- background scene ---------- */
+#scene{position:fixed; inset:0; z-index:0; pointer-events:none}
+.film{position:fixed; inset:0; z-index:2; pointer-events:none}
+.grain{background-image:radial-gradient(rgba(255,255,255,.5) .5px,transparent .6px); background-size:3px 3px; mix-blend-mode:overlay; opacity:.13}
+.vig{background:radial-gradient(ellipse at 50% 38%, #0000 46%, rgba(2,8,4,.72) 100%)}
+.scan{background:repeating-linear-gradient(rgba(0,0,0,.16) 0 1px,transparent 1px 4px); opacity:.5}
+#wrap{position:relative; z-index:3}
+
+/* ---------- gate ---------- */
+#gate{position:fixed; inset:0; z-index:200; background:#030905; display:flex; align-items:center; justify-content:center; text-align:center; cursor:pointer; transition:opacity .5s}
+#gate.off{opacity:0; pointer-events:none}
+.gatebox{padding:26px}
+.gate-k{font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.34em; color:var(--lime); opacity:.7}
+.gate-t{font-family:"Shrikhand",serif; font-size:clamp(38px,9vw,84px); color:var(--lime2); line-height:.95; margin:16px 0 10px; text-shadow:0 0 32px rgba(141,255,58,.35), 5px 5px 0 rgba(166,60,255,.55)}
+.gate-s{color:var(--dim); font-size:14px; max-width:430px; margin:0 auto}
+.gate-b{display:inline-block; margin-top:22px; font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:.3em; color:var(--ink); background:var(--lime); padding:12px 22px; border-radius:999px; animation:pulseg 1.6s infinite}
+@keyframes pulseg{0%,100%{box-shadow:0 0 0 0 rgba(141,255,58,.5)}50%{box-shadow:0 0 0 16px rgba(141,255,58,0)}}
+.gatefly{position:absolute; width:9px; height:9px; border-radius:50%; background:#0c1a10; box-shadow:0 0 7px rgba(255,60,224,.5)}
+
+/* ---------- topbar ---------- */
+.ticker{position:relative; z-index:6; border-bottom:1px solid var(--edge); background:rgba(4,14,8,.86); overflow:hidden; backdrop-filter:blur(4px)}
+.ticker div{display:inline-block; white-space:nowrap; padding:7px 0; font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.2em; color:var(--lime); animation:mq 34s linear infinite}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker b{color:var(--mag); font-weight:400}
+
+/* ---------- layout ---------- */
+.shell{max-width:1180px; margin:0 auto; padding:0 22px}
+section{position:relative; z-index:3}
+.sec-h{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:20px}
+.sec-h h2{font-family:"Shrikhand",serif; font-size:clamp(26px,4.4vw,44px); color:var(--lime2); letter-spacing:.01em}
+.sec-h span{font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.26em; color:var(--dim)}
+
+/* ---------- hero ---------- */
+.hero{padding:46px 0 34px}
+.hero-in{display:grid; grid-template-columns:1.08fr .92fr; gap:34px; align-items:center}
+.hero-in>*{min-width:0}
+.kick{font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.3em; color:var(--lime); opacity:.85; display:flex; gap:10px; align-items:center}
+.kick i{width:7px;height:7px;border-radius:50%;background:var(--mag); box-shadow:0 0 10px var(--mag); font-style:normal; animation:blink 1.9s infinite}
+@keyframes blink{50%{opacity:.2}}
+.wordmark{position:relative; font-family:"Shrikhand",serif; font-size:clamp(54px,11vw,118px); line-height:.86; margin:14px 0 4px; letter-spacing:.005em;
+  background:linear-gradient(#fbffee 30%,#c9ff8a 52%,#5fd11c 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter:drop-shadow(0 8px 0 #2c5d12) drop-shadow(0 16px 24px rgba(166,60,255,.5));
+}
+.wordmark::before{content:"DRUG\A FLY"; white-space:pre; position:absolute; inset:0; z-index:-1; color:transparent; -webkit-text-stroke:9px #04140a; background:none}
+.tick-tag{display:inline-block; font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:.24em; color:var(--ink); background:var(--lime); padding:4px 12px; border-radius:4px; transform:rotate(-1.4deg)}
+.lead{font-size:clamp(16px,2vw,19px); color:var(--cream); margin:16px 0 0; max-width:52ch; font-weight:500}
+.lead b{color:var(--lime); font-weight:700}
+.lore{color:#bcd6b4; font-size:15px; margin:12px 0 0; max-width:54ch}
+.btns{display:flex; gap:12px; flex-wrap:wrap; margin-top:22px; align-items:center}
+.btn{display:inline-flex; align-items:center; gap:9px; font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:.2em; text-decoration:none; padding:13px 20px; border-radius:10px; border:2px solid var(--ink); background:var(--lime); color:var(--ink); box-shadow:0 4px 0 var(--ink); font-weight:700}
+.btn:active{transform:translateY(3px); box-shadow:0 1px 0 var(--ink)}
+.btn.ghost{background:rgba(10,26,15,.8); color:var(--lime2); border-color:var(--edge); box-shadow:0 4px 0 rgba(3,18,10,.9)}
+.btn.soon{background:#2b3b2c; color:#8fa88c; cursor:not-allowed; box-shadow:0 4px 0 #111c13}
+.btn.soon::after{content:"SOON"; font-size:9px; letter-spacing:.16em; background:#111c13; padding:2px 6px; border-radius:4px}
+#caBox{margin-top:16px; display:inline-flex; gap:10px; align-items:center; font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--dim); border:1px dashed var(--edge); padding:8px 12px; border-radius:8px; cursor:pointer; background:rgba(4,14,8,.6)}
+#caBox b{color:var(--lime2); font-weight:400}
+
+/* portrait */
+.port{position:relative; display:flex; flex-direction:column; align-items:center}
+.port-stage{position:relative; width:100%; cursor:pointer; filter:drop-shadow(0 26px 40px rgba(0,0,0,.6)) drop-shadow(0 0 46px rgba(255,60,224,.22))}
+.port-stage img{width:100%; animation:hover 3.6s ease-in-out infinite alternate}
+@keyframes hover{from{transform:translateY(0) rotate(-.7deg)}to{transform:translateY(-14px) rotate(1deg)}}
+.poke{position:absolute; left:50%; bottom:-2px; transform:translateX(-50%) rotate(-2deg); font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.18em; background:var(--mag); color:#1b0518; padding:7px 13px; border-radius:999px; border:2px solid #2b0726; box-shadow:4px 4px 0 rgba(20,4,18,.6); white-space:nowrap; font-weight:700}
+#drop{position:absolute; inset:-20% -10% -10% -10%; pointer-events:none; overflow:visible}
+.coin{position:absolute; width:26px; height:26px; border-radius:50%; background:radial-gradient(circle at 34% 30%,#f6ffe0,#8dff3a 46%,#2f7a0d); border:2px solid #16350b; box-shadow:0 0 12px rgba(141,255,58,.6)}
+.coin.bud{border-radius:46% 54% 50% 50%/60% 58% 42% 40%; background:radial-gradient(circle at 40% 30%,#d6a6ff,#7a3ccf 52%,#3b1a63); border-color:#2a1046; box-shadow:0 0 14px rgba(166,60,255,.6)}
+.cta-sticker{margin-top:18px; display:inline-flex; align-items:center; gap:10px; text-decoration:none; font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:.18em; font-weight:700; color:#12220f; background:var(--amber); border:2px solid var(--ink); padding:12px 18px; border-radius:12px; box-shadow:5px 5px 0 rgba(3,18,10,.75); transform:rotate(-1.6deg)}
+.cta-sticker i{font-style:normal; animation:blink 1.4s infinite}
+
+/* ---------- game ---------- */
+.game{padding:54px 0 10px}
+.gwrap{border:2px solid var(--edge); border-radius:18px; background:rgba(5,16,9,.88); padding:18px; backdrop-filter:blur(3px)}
+.hud{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px}
+.hud div{flex:1 1 120px; border:1px solid var(--edge); border-radius:10px; padding:9px 12px; background:rgba(10,26,15,.7)}
+.hud span{display:block; font-family:"JetBrains Mono",monospace; font-size:9.5px; letter-spacing:.22em; color:var(--dim)}
+.hud b{font-family:"JetBrains Mono",monospace; font-size:20px; color:var(--lime2); font-weight:700}
+.hud b.mg{color:var(--mag)}
+.gmain{display:grid; grid-template-columns:1.25fr .75fr; gap:16px}
+.gmain>*{min-width:0}
+.canvas-hold{position:relative; border:1px solid var(--edge); border-radius:14px; overflow:hidden; background:#040e07; aspect-ratio:1/1; touch-action:none}
+#gcv{width:100%; height:100%; display:block; cursor:none}
+.g-hint{position:absolute; left:12px; right:12px; bottom:12px; font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.1em; color:var(--lime2); background:rgba(3,12,7,.82); border:1px solid var(--edge); border-radius:9px; padding:8px 11px; text-align:center}
+.g-start{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(3,10,6,.9); flex-direction:column; gap:12px; text-align:center; padding:22px}
+.g-start.off{display:none}
+.g-start p{color:var(--dim); font-size:13px; max-width:32ch; margin:0}
+.g-btn{font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:.2em; font-weight:700; color:var(--ink); background:var(--lime); border:2px solid var(--ink); border-radius:10px; padding:13px 20px; cursor:pointer; box-shadow:0 4px 0 var(--ink)}
+.g-btn:active{transform:translateY(3px); box-shadow:0 1px 0 var(--ink)}
+.side h4{font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.24em; color:var(--dim); margin:0 0 8px; font-weight:400}
+.manifest{list-style:none; margin:0 0 14px; padding:0; border:1px solid var(--edge); border-radius:12px; overflow:hidden}
+.manifest li{display:flex; align-items:center; gap:9px; padding:7px 11px; font-family:"JetBrains Mono",monospace; font-size:11.5px; color:#5e7a5a; border-bottom:1px solid rgba(141,255,58,.1); background:rgba(8,20,12,.6)}
+.manifest li:last-child{border-bottom:0}
+.manifest li em{font-style:normal; margin-left:auto; font-size:10px; opacity:.7}
+.manifest li.now{color:var(--amber); background:rgba(255,201,60,.09)}
+.manifest li.done{color:var(--lime2)}
+.manifest li.done em{color:var(--lime)}
+.log{border:1px solid var(--edge); border-radius:12px; background:rgba(8,20,12,.6); height:186px; overflow-y:auto; padding:9px 11px; font-family:"JetBrains Mono",monospace; font-size:11px; color:#93b48c}
+.log p{margin:0 0 6px}
+.log p b{color:var(--lime); font-weight:400}
+.log p.bad b{color:var(--mag)}
+
+/* ---------- cards ---------- */
+.cards{padding:54px 0 10px}
+.cgrid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px}
+.cgrid>*{min-width:0}
+.card{border:1px solid var(--edge); border-radius:14px; padding:15px; background:rgba(8,20,12,.78); position:relative; overflow:hidden; min-height:186px}
+.card.lock{color:#3e5340; background:repeating-linear-gradient(135deg,rgba(10,24,14,.8) 0 9px,rgba(6,16,9,.8) 9px 18px)}
+.card.lock h3,.card.lock p{filter:blur(4px); opacity:.5}
+.card .num{font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.22em; color:var(--dim)}
+.card h3{font-family:"Shrikhand",serif; font-size:19px; color:var(--lime2); margin:7px 0 8px; line-height:1.12}
+.card p{font-size:13.5px; color:#b7d3ae; margin:0}
+.card .seal{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.22em; color:var(--dim)}
+.card.open .seal{display:none}
+.card.open{box-shadow:inset 0 0 34px rgba(141,255,58,.1)}
+
+/* ---------- notes ---------- */
+.notes{padding:54px 0 10px}
+.ngrid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+.ngrid>*{min-width:0}
+.note{border:1px solid var(--edge); border-radius:16px; overflow:hidden; background:rgba(8,20,12,.8); display:flex; flex-direction:column}
+.note img{width:100%; height:auto; aspect-ratio:4/3; object-fit:cover}
+.note .nb{padding:14px}
+.note .tag{font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.2em; color:var(--amber)}
+.note p{font-size:13.5px; color:#b7d3ae; margin:8px 0 0}
+
+/* ---------- numbers ---------- */
+.nums{padding:54px 0 10px}
+.ngr{display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
+.ngr>*{min-width:0}
+.spec{border:1px solid var(--edge); border-radius:14px; padding:16px; background:rgba(8,20,12,.78)}
+.spec .top{display:flex; justify-content:space-between; align-items:baseline; gap:12px; border-bottom:1px dashed var(--edge); padding-bottom:9px; margin-bottom:10px}
+.spec .top span{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.22em; color:var(--dim)}
+.spec .top b{font-family:"JetBrains Mono",monospace; font-size:17px; color:var(--lime2)}
+.spec p{margin:0; font-size:13.5px; color:#b7d3ae}
+
+/* ---------- footer ---------- */
+footer{padding:56px 0 40px; text-align:center}
+.fwm{font-family:"Shrikhand",serif; font-size:clamp(40px,12vw,120px); color:transparent; -webkit-text-stroke:2px rgba(141,255,58,.4); line-height:.9}
+.fline{font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.24em; color:var(--dim); margin-top:14px}
+.flinks{display:flex; gap:12px; justify-content:center; margin-top:18px; flex-wrap:wrap}
+
+/* ---------- audio controls ---------- */
+.actrl{position:fixed; right:14px; bottom:14px; z-index:120; display:flex; gap:8px}
+.actrl button{font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.18em; color:var(--lime2); background:rgba(5,16,9,.9); border:1px solid var(--edge); border-radius:999px; padding:8px 13px; cursor:pointer}
+.actrl button.on{background:var(--lime); color:var(--ink); border-color:var(--lime)}
+
+/* ---------- win ---------- */
+#rain{position:fixed; inset:0; pointer-events:none; z-index:140; overflow:hidden}
+#win{position:fixed; inset:0; z-index:150; display:none; align-items:center; justify-content:center; background:rgba(3,10,6,.86); padding:22px}
+#win.on{display:flex}
+.wincard{max-width:520px; text-align:center; border:2px solid var(--lime); border-radius:20px; background:#081509; padding:28px; box-shadow:0 0 70px rgba(141,255,58,.3)}
+.wincard .k{font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.28em; color:var(--dim)}
+.wincard h3{font-family:"Shrikhand",serif; font-size:clamp(28px,6vw,46px); color:var(--lime2); margin:10px 0}
+.wincard p{color:#b7d3ae; font-size:14px}
+.wincard img{width:160px; margin:6px auto 2px}
+
+@media (max-width:1000px){
+  .hero-in{grid-template-columns:1fr; gap:22px}
+  .hero-in>div:last-child{order:-1}
+  .port-stage img{max-height:280px; width:auto; margin:0 auto}
+  .gmain{grid-template-columns:1fr}
+  .cgrid{grid-template-columns:repeat(2,1fr)}
+  .ngrid{grid-template-columns:1fr}
+  .ngr{grid-template-columns:1fr}
+}
+@media (min-width:1001px) and (max-height:800px){
+  .hero{padding:18px 0 16px}
+  .wordmark{font-size:clamp(42px,6.2vw,72px)}
+  .wordmark::before{-webkit-text-stroke:7px #04140a}
+  .lead{font-size:16px; margin-top:11px}
+  .lore{font-size:13px; margin-top:8px; line-height:1.45}
+  .btns{margin-top:13px}
+  .btn{padding:10px 16px}
+  #caBox{margin-top:10px}
+  .cta-sticker{margin-top:12px; padding:10px 15px}
+  .port-stage img{max-height:330px; width:auto; margin:0 auto}
+  .kick{font-size:10px}
+}
+@media (max-width:560px){
+  .wordmark::before{-webkit-text-stroke:6px #04140a}
+}
+@media (max-width:560px){
+  .shell{padding:0 16px}
+  .cgrid{grid-template-columns:1fr}
+  .hud div{flex:1 1 44%}
+  .log{height:150px}
+  .actrl{left:10px; bottom:10px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+</style>
+</head>
+<body>
+
+<canvas id="scene"></canvas>
+<div class="film scan"></div>
+<div class="film grain"></div>
+<div class="film vig"></div>
+
+<div id="gate">
+  <div class="gatebox">
+    <div class="gate-k">UNIT 04 · LIGHTS ARE ON · SOMEONE IS IN THERE</div>
+    <div class="gate-t">DRUG FLY</div>
+    <div class="gate-s">he does the rounds at four in the morning and he does not like being watched. open the flap anyway.</div>
+    <div class="gate-b">CLICK TO ENTER THE TENT</div>
+  </div>
+</div>
+
+<div id="wrap">
+
+<div class="ticker"><div id="tk"></div></div>
+
+<section class="hero">
+  <div class="shell hero-in">
+    <div>
+      <div class="kick"><i>•</i> GROW TENT 04 · WEEK 14 · POLLEN COUNT: YES</div>
+      <h1 class="wordmark">DRUG<br>FLY</h1>
+      <div class="tick-tag">TICKER $DRUGFLY</div>
+      <p class="lead">Drug Fly is the only fly in the tent who works. He flies around every bush and <b>pollinates all of them himself</b>, so he treats the whole harvest as his own product and sells it by the gram.</p>
+      <p class="lore">i am not a bee. nobody in this tent has ever confirmed that i am a bee, and nobody has asked me to leave either. i show up at 4:12, i do the rounds, and by lunch every flower in here has been personally visited by me.</p>
+      <p class="lore">the plants do not need me. they are wind pollinated and they have been very clear about that. i keep doing it anyway, because a product with a name on it moves better than a product without one, and my name is on all of it.</p>
+      <div class="btns">
+        <a class="btn soon" id="buyBtn" href="#">BUY $DRUGFLY</a>
+        <a class="btn ghost xLink" id="xBtn" href="#" target="_blank" rel="noopener">X / TWITTER</a>
+      </div>
+      <div id="caBox"><span>CA</span><b class="ca-val">not deployed yet</b></div>
+    </div>
+    <div>
+      <div class="port">
+        <div class="port-stage" id="portStage">
+          <img src="f-full.webp" alt="the fly of unit 04, mid-round, holding the only leaf he trusts">
+          <div id="drop"></div>
+          <div class="poke">poke him · he pays</div>
+        </div>
+        <a class="cta-sticker" href="#pollen"><i>▶</i> POLLINATE THE TENT · 8 BUSHES</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="game" id="pollen">
+  <div class="shell">
+    <div class="sec-h"><h2>THE POLLINATION</h2><span>DO THE ROUNDS · 8 BUSHES · 04:12</span></div>
+    <div class="gwrap">
+      <div class="hud">
+        <div><span>BUSHES POLLINATED</span><b id="hDone">0/8</b></div>
+        <div><span>POLLEN CARRIED</span><b id="hPollen">0.00 g</b></div>
+        <div><span>WRONG WAY</span><b class="mg" id="hBad">0</b></div>
+        <div><span>SHIFT</span><b id="hTime">04:12</b></div>
+      </div>
+      <div class="gmain">
+        <div class="canvas-hold">
+          <canvas id="gcv"></canvas>
+          <div class="g-hint" id="gHint">circle the fly around the bush, the way the arrow points, until the ring fills</div>
+          <div class="g-start" id="gStart">
+            <div style="font-family:Shrikhand,serif;font-size:26px;color:var(--lime2)">DO THE ROUNDS</div>
+            <p>move your cursor — the fly follows. swirl him around each bush, following the arrow, until the ring closes. eight bushes and the harvest is yours.</p>
+            <button class="g-btn" id="gGo">START THE SHIFT</button>
+          </div>
+        </div>
+        <div class="side">
+          <h4>BUSH MANIFEST · UNIT 04</h4>
+          <ul class="manifest" id="mani"></ul>
+          <h4>TENT LOG</h4>
+          <div class="log" id="log"><p><b>04:12</b> lamp on. he is awake.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cards">
+  <div class="shell">
+    <div class="sec-h"><h2>THE ROUNDS</h2><span>ONE ENTRY PER BUSH · UNLOCKED BY WORK</span></div>
+    <div class="cgrid" id="cgrid"></div>
+  </div>
+</section>
+
+<section class="notes">
+  <div class="shell">
+    <div class="sec-h"><h2>FIELD NOTES</h2><span>TAKEN INSIDE THE TENT</span></div>
+    <div class="ngrid">
+      <div class="note">
+        <img src="f-face.webp" alt="the eyes at the end of a fourteen hour round">
+        <div class="nb"><div class="tag">WEEK 14 · 04:12</div><p>i have been awake since the lamp clicked on, and the lamp does not click off. the eyes are not a condition, they are a schedule, and the schedule is the job.</p></div>
+      </div>
+      <div class="note">
+        <img src="f-leaf.webp" alt="exhibit a, the bush he pollinated twice by accident">
+        <div class="nb"><div class="tag">EXHIBIT A · UNPAID</div><p>this one i pollinated twice by accident and it has outperformed the entire row ever since. i do not know why it worked. i have stopped asking and started charging.</p></div>
+      </div>
+      <div class="note">
+        <img src="f-kicks.webp" alt="six legs, two shoes, forty laps a day">
+        <div class="nb"><div class="tag">THE ROUNDS · 0.4 KM/DAY</div><p>eight bushes, forty laps, every single day, in shoes. the shoes are completely unnecessary. the shoes are also the reason nobody in this tent questions my pricing.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="nums">
+  <div class="shell">
+    <div class="sec-h"><h2>THE NUMBERS</h2><span>WRITTEN ON A LEAF, IN POLLEN</span></div>
+    <div class="ngr">
+      <div class="spec"><div class="top"><span>SUPPLY</span><b>1,000,000,000</b></div><p>one billion, the same as the pollen count on my back on an average tuesday. it is not going up and i am not going back to bush one to make more, so the number is finished.</p></div>
+      <div class="spec"><div class="top"><span>LIQUIDITY</span><b>BURNED</b></div><p>burned on purpose, standing in front of the extractor fan, so the ash went out through the vent and into the street. i cannot get it back and neither can you, which is the most honest arrangement in this tent.</p></div>
+      <div class="spec"><div class="top"><span>TAX</span><b>0 / 0</b></div><p>zero on the way in, zero on the way out. i take my cut the way i have always taken it, during quality control, in full, and that has never once shown up on a chart.</p></div>
+      <div class="spec"><div class="top"><span>OWNERSHIP</span><b>RENOUNCED</b></div><p>renounced at 4:12 in the morning while standing on bush three, with nobody watching and nothing to sign. the lamp stayed on and the tent kept running. that was the whole point of the tent.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="shell">
+    <div class="fwm">DRUG FLY</div>
+    <div class="fline">UNIT 04 · LIGHTS 24/7 · HARVEST MOVES AT DAWN</div>
+    <div class="flinks">
+      <a class="btn soon" href="#">BUY $DRUGFLY</a>
+      <a class="btn ghost xLink" href="#" target="_blank" rel="noopener">X / TWITTER</a>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<div id="rain"></div>
+<div id="win"><div class="wincard">
+  <div class="k">UNIT 04 · SHIFT COMPLETE</div>
+  <img src="f-face.webp" alt="he looks exactly the same as he did at 4:12">
+  <h3>ALL EIGHT POLLINATED</h3>
+  <p id="winText">every bush in here was touched by me personally, so the whole room is mine by a logic nobody has written down. tomorrow i start on unit five, where nobody knows me yet.</p>
+  <button class="g-btn" id="winClose" style="margin-top:14px">BACK TO THE TENT</button>
+</div></div>
+
+<div class="actrl">
+  <button id="sfxBtn" class="on">SOUND ON</button>
+  <button id="musBtn">MUSIC OFF</button>
+</div>
+
+<script>
+/* ============ SETTINGS ============ */
+window.CONTRACT = "";      /* адрес контракта */
+window.TWITTER  = "";      /* ссылка на X */
+window.BUY_URL  = "";      /* ссылка на покупку */
+/* ================================== */
+
+var CA=(window.CONTRACT||"").trim(), TW=(window.TWITTER||"").trim(), BUY=(window.BUY_URL||"").trim();
+if(CA){
+  document.querySelectorAll(".ca-val").forEach(function(e){ e.textContent=CA.slice(0,6)+"…"+CA.slice(-4); });
+  document.getElementById("caBox").addEventListener("click",function(){
+    var b=this.querySelector("b"), old=b.textContent;
+    navigator.clipboard.writeText(CA).then(function(){ b.textContent="copied"; setTimeout(function(){ b.textContent=old; },1200); });
+  });
+}
+if(TW){ document.querySelectorAll("#xBtn,.xLink").forEach(function(a){ a.href=TW; }); }
+document.querySelectorAll(".btn.soon").forEach(function(buy){
+  if(BUY){ buy.href=BUY; buy.target="_blank"; buy.rel="noopener"; buy.classList.remove("soon"); }
+  else{ buy.addEventListener("click",function(e){ e.preventDefault(); }); }
+});
+</script>
+
+<script>
+(function(){
+"use strict";
+
+/* ================= AUDIO ================= */
+var AC=null, sfxOn=true, vol=1;
+function ac(){ try{ if(!AC){ AC=new (window.AudioContext||window.webkitAudioContext)(); } if(AC.state==="suspended"){ AC.resume(); } return AC; }catch(e){ return null; } }
+function tone(f1,f2,dur,type,g){
+  if(!sfxOn) return; var c=ac(); if(!c) return;
+  var o=c.createOscillator(), gg=c.createGain(), t=c.currentTime;
+  o.type=type||"sine"; o.frequency.setValueAtTime(f1,t);
+  if(f2&&f2!==f1) o.frequency.exponentialRampToValueAtTime(Math.max(20,f2),t+dur);
+  gg.gain.setValueAtTime(.0001,t); gg.gain.exponentialRampToValueAtTime((g||.06)*vol,t+.012);
+  gg.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  o.connect(gg); gg.connect(c.destination); o.start(t); o.stop(t+dur+.05);
+}
+function noiseHit(dur,g){
+  if(!sfxOn) return; var c=ac(); if(!c) return;
+  var n=Math.floor(c.sampleRate*dur), b=c.createBuffer(1,n,c.sampleRate), d=b.getChannelData(0);
+  for(var i=0;i<n;i++){ d[i]=(Math.random()*2-1)*(1-i/n); }
+  var s=c.createBufferSource(); s.buffer=b;
+  var f=c.createBiquadFilter(); f.type="bandpass"; f.frequency.value=1700; f.Q.value=.9;
+  var gg=c.createGain(); gg.gain.value=(g||.05)*vol;
+  s.connect(f); f.connect(gg); gg.connect(c.destination); s.start();
+}
+/* lazy buzz drone that follows the fly */
+var BZ=null;
+function buzzStart(){
+  var c=ac(); if(!c||BZ) return;
+  try{
+    var o=c.createOscillator(), o2=c.createOscillator(), g=c.createGain(), f=c.createBiquadFilter(), lfo=c.createOscillator(), lg=c.createGain();
+    o.type="sawtooth"; o.frequency.value=118; o2.type="square"; o2.frequency.value=59;
+    f.type="lowpass"; f.frequency.value=760; f.Q.value=3;
+    lfo.type="sine"; lfo.frequency.value=11; lg.gain.value=26; lfo.connect(lg); lg.connect(o.frequency);
+    g.gain.value=0;
+    o.connect(f); o2.connect(f); f.connect(g); g.connect(c.destination);
+    o.start(); o2.start(); lfo.start();
+    BZ={g:g,f:f};
+  }catch(e){}
+}
+function buzzSet(v){ if(!BZ) return; try{ BZ.g.gain.setTargetAtTime(sfxOn?v*vol:0, ac().currentTime, .09); BZ.f.frequency.setTargetAtTime(600+v*2600, ac().currentTime, .12); }catch(e){} }
+
+/* ---- music: slow dub loop, off-beat skank + deep bass ---- */
+var MU={on:false,t:null,step:0,next:0};
+var STEP=0.214;
+var BASS=[55,0,0,0, 55,0,41.2,0, 49,0,0,0, 36.7,0,41.2,0];
+var SKANK=[0,0,1,0, 0,0,1,0, 0,0,1,0, 0,0,1,0];
+var CH=[[220,261.6,329.6],[220,261.6,329.6],[196,246.9,329.6],[174.6,220,293.7]];
+var MEL=[0,0,0,659.3, 0,0,587.3,0, 0,523.3,0,0, 0,0,0,440];
+function mnote(f,at,dur,type,g,cut){
+  var c=ac(); if(!c||!f) return;
+  var o=c.createOscillator(), gg=c.createGain(), f2=c.createBiquadFilter();
+  o.type=type; o.frequency.setValueAtTime(f,at);
+  f2.type="lowpass"; f2.frequency.value=cut||1600;
+  gg.gain.setValueAtTime(.0001,at); gg.gain.exponentialRampToValueAtTime(g*vol,at+.02);
+  gg.gain.exponentialRampToValueAtTime(.0001,at+dur);
+  o.connect(f2); f2.connect(gg); gg.connect(c.destination); o.start(at); o.stop(at+dur+.05);
+}
+function musSchedule(){
+  var c=ac(); if(!c) return;
+  while(MU.next < c.currentTime+.5){
+    var i=MU.step%16, at=Math.max(MU.next,c.currentTime+.02), bar=Math.floor(MU.step/16)%4;
+    if(BASS[i]) mnote(BASS[i],at,.46,"triangle",.085,420);
+    if(SKANK[i]){ var ch=CH[bar]; for(var k=0;k<3;k++){ mnote(ch[k],at,.13,"square",.018,2100); } }
+    if(MEL[i]) mnote(MEL[i],at,.5,"sine",.03,2600);
+    if(i%8===4) mnote(1400,at,.05,"square",.012,4000);
+    MU.next+=STEP; MU.step++;
+  }
+}
+function musToggle(on){
+  MU.on=on;
+  var b=document.getElementById("musBtn");
+  if(on){ var c=ac(); if(!c) return; MU.next=c.currentTime+.1; if(!MU.t) MU.t=setInterval(musSchedule,100); b.textContent="MUSIC ON"; b.classList.add("on"); }
+  else{ if(MU.t){ clearInterval(MU.t); MU.t=null; } b.textContent="MUSIC OFF"; b.classList.remove("on"); }
+}
+document.addEventListener("visibilitychange",function(){
+  if(document.hidden&&MU.on&&MU.t){ clearInterval(MU.t); MU.t=null; }
+  else if(!document.hidden&&MU.on&&!MU.t){ var c=ac(); if(c){ MU.next=c.currentTime+.1; MU.t=setInterval(musSchedule,100); } }
+});
+document.getElementById("musBtn").addEventListener("click",function(){ musToggle(!MU.on); });
+document.getElementById("sfxBtn").addEventListener("click",function(){
+  sfxOn=!sfxOn; this.textContent=sfxOn?"SOUND ON":"SOUND OFF"; this.classList.toggle("on",sfxOn);
+  if(!sfxOn) buzzSet(0);
+});
+
+/* ================= TICKER ================= */
+var TKL=["UNIT 04","LIGHTS 24/7","every bush pollinated by hand","he has no hands","WEEK 14","the fan does it for free","he still charges","pollen count: yes","harvest moves at dawn","quality control: ongoing","the bee never came back","0.4 KM WALKED TODAY","he is not a bee","nobody asked him to leave"];
+(function(){
+  var s=""; for(var r=0;r<2;r++){ for(var i=0;i<TKL.length;i++){ s+=" <b>·</b> "+TKL[i]; } }
+  document.getElementById("tk").innerHTML=s+" ";
+})();
+
+/* ================= GATE ================= */
+var gate=document.getElementById("gate"), opened=false;
+for(var gf=0; gf<9; gf++){
+  (function(n){
+    var e=document.createElement("div"); e.className="gatefly";
+    e.style.left=(8+Math.random()*84)+"%"; e.style.top=(10+Math.random()*80)+"%";
+    gate.appendChild(e);
+    var t=Math.random()*6.28;
+    setInterval(function(){
+      t+=.06+n*.004;
+      e.style.transform="translate("+(Math.sin(t*1.7)*46)+"px,"+(Math.cos(t*1.1)*30)+"px)";
+    },40);
+  })(gf);
+}
+function openGate(){
+  if(opened) return; opened=true;
+  gate.classList.add("off");
+  setTimeout(function(){ gate.style.display="none"; },520);
+  ac(); buzzStart(); buzzSet(.02);
+  tone(90,260,.5,"sawtooth",.05); setTimeout(function(){ tone(330,660,.22,"square",.04); },160);
+  musToggle(true);
+}
+gate.addEventListener("click",openGate);
+setTimeout(openGate,25000);
+
+/* ================= BACKGROUND: THE TENT ================= */
+(function(){
+  var cv=document.getElementById("scene"), ctx=cv.getContext("2d"), W=0,H=0,DPR=1;
+  var bushes=[], flies=[], motes=[];
+  function resize(){
+    DPR=Math.min(2,window.devicePixelRatio||1);
+    W=window.innerWidth; H=window.innerHeight;
+    cv.width=Math.floor(W*DPR); cv.height=Math.floor(H*DPR);
+    cv.style.width=W+"px"; cv.style.height=H+"px";
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    build();
+  }
+  function build(){
+    bushes=[]; var n = W<700?4:7;
+    for(var i=0;i<n;i++){
+      var x=(i+.5)*(W/n)+(Math.random()-.5)*40;
+      bushes.push({x:x, y:H-20-Math.random()*30, s:(W<700?.8:1)*(.72+Math.random()*.5), ph:Math.random()*6.3, glow:0});
+    }
+    flies=[]; var fn=W<700?8:15;
+    for(var j=0;j<fn;j++){
+      flies.push({x:Math.random()*W, y:H*.2+Math.random()*H*.7, vx:0, vy:0, t:Math.random()*99,
+        tgt:Math.floor(Math.random()*bushes.length), hold:0, wob:Math.random()*6.3,
+        sc:.8+Math.random()*.85, roam:Math.random()<.3?{x:Math.random()*W,y:H*.12+Math.random()*H*.45}:null});
+    }
+  }
+  function leaflet(g,len,wid){
+    g.beginPath(); g.moveTo(0,0);
+    g.quadraticCurveTo(wid,-len*.45,0,-len);
+    g.quadraticCurveTo(-wid,-len*.45,0,0);
+    g.fill();
+  }
+  function leaf(g,x,y,size,ang,col,alpha){
+    g.save(); g.translate(x,y); g.rotate(ang); g.globalAlpha=alpha; g.fillStyle=col;
+    var blades=7;
+    for(var i=0;i<blades;i++){
+      var a=(i-(blades-1)/2)*0.36;
+      var l=size*(1-Math.abs(i-(blades-1)/2)*0.15);
+      g.save(); g.rotate(a); leaflet(g,l,l*.18); g.restore();
+    }
+    g.restore();
+  }
+  function drawBush(b,t){
+    var sway=Math.sin(t*.0011+b.ph)*0.06;
+    ctx.save(); ctx.translate(b.x,b.y); ctx.scale(b.s,b.s); ctx.rotate(sway);
+    ctx.strokeStyle="rgba(30,66,28,.85)"; ctx.lineWidth=5; ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(0,-120); ctx.stroke();
+    var glow=b.glow;
+    for(var i=0;i<9;i++){
+      var yy=-24-i*13, side=(i%2?1:-1), off=side*(14+ (i%3)*8);
+      var col = i>5 ? "rgba(46,102,36,1)" : "rgba(30,74,26,1)";
+      leaf(ctx, off, yy, 40+ (i%3)*9, side*0.5+Math.sin(t*.0013+i)*0.05, col, .6+glow*.35);
+    }
+    leaf(ctx,0,-130,46,Math.sin(t*.0015)*.08,"rgba(56,122,40,1)",.7+glow*.3);
+    ctx.globalAlpha=.55+glow*.45; ctx.fillStyle="rgba(150,92,205,.55)";
+    for(var k=0;k<5;k++){
+      ctx.beginPath(); ctx.ellipse(((k%2)?1:-1)*(10+k*5), -52-k*16, 7, 10, k*.4, 0, 6.3); ctx.fill();
+    }
+    ctx.restore();
+    if(glow>0){ b.glow=Math.max(0,glow-.006); }
+  }
+  function drawFly(g,x,y,ang,sc,wing){
+    g.save(); g.translate(x,y); g.rotate(ang); g.scale(sc,sc);
+    g.globalAlpha=.55+Math.random()*.2; g.fillStyle="rgba(214,236,255,.5)";
+    var w=Math.sin(wing)*.6;
+    g.save(); g.rotate(-.5+w); g.beginPath(); g.ellipse(-2,-6,10,4,0,0,6.3); g.fill(); g.restore();
+    g.save(); g.rotate(.5-w); g.beginPath(); g.ellipse(-2,6,10,4,0,0,6.3); g.fill(); g.restore();
+    g.globalAlpha=1;
+    g.fillStyle="#0b1a12"; g.beginPath(); g.ellipse(0,0,9,5.4,0,0,6.3); g.fill();
+    g.fillStyle="#123020"; g.beginPath(); g.ellipse(7,0,4.2,4,0,0,6.3); g.fill();
+    g.fillStyle="rgba(255,60,224,.85)"; g.beginPath(); g.arc(9,-2.2,1.9,0,6.3); g.fill(); g.beginPath(); g.arc(9,2.2,1.9,0,6.3); g.fill();
+    g.restore();
+  }
+  var last=0;
+  function frame(t){
+    if(document.hidden){ requestAnimationFrame(frame); return; }
+    var dt=Math.min(40,t-last); last=t;
+    ctx.clearRect(0,0,W,H);
+    var gr=ctx.createLinearGradient(0,0,0,H);
+    gr.addColorStop(0,"#0a1b10"); gr.addColorStop(.45,"#061009"); gr.addColorStop(1,"#030905");
+    ctx.fillStyle=gr; ctx.fillRect(0,0,W,H);
+    var pulse=.75+Math.sin(t*.0008)*.25;
+    var lamp=ctx.createRadialGradient(W*.5,-60,20,W*.5,-60,H*.95);
+    lamp.addColorStop(0,"rgba(255,60,224,"+(.20*pulse)+")");
+    lamp.addColorStop(.4,"rgba(166,60,255,"+(.10*pulse)+")");
+    lamp.addColorStop(1,"rgba(0,0,0,0)");
+    ctx.fillStyle=lamp; ctx.fillRect(0,0,W,H);
+    var lamp2=ctx.createRadialGradient(W*.12,H*.1,10,W*.12,H*.1,H*.8);
+    lamp2.addColorStop(0,"rgba(141,255,58,.10)"); lamp2.addColorStop(1,"rgba(0,0,0,0)");
+    ctx.fillStyle=lamp2; ctx.fillRect(0,0,W,H);
+
+    for(var i=0;i<bushes.length;i++){ drawBush(bushes[i],t); }
+
+    for(var j=0;j<flies.length;j++){
+      var f=flies[j], b=bushes[f.tgt]||bushes[0]; if(!b) break;
+      f.t+=dt*.001; f.wob+=dt*.05;
+      var tx,ty;
+      if(f.hold>0){
+        f.hold-=dt;
+        var r=34+Math.sin(f.t*2)*10;
+        tx=b.x+Math.cos(f.t*3.1)*r; ty=b.y-70+Math.sin(f.t*3.1)*r*.6;
+        if(Math.random()<.28){ motes.push({x:f.x,y:f.y,vx:(Math.random()-.5)*.4,vy:-.2-Math.random()*.3,a:1,c:Math.random()<.5?"141,255,58":"255,201,60"}); }
+        b.glow=Math.min(1,b.glow+.012);
+        if(f.hold<=0){ f.tgt=Math.floor(Math.random()*bushes.length); }
+      }else if(f.roam){
+        tx=f.roam.x+Math.sin(f.t*1.1)*70; ty=f.roam.y+Math.cos(f.t*.8)*50;
+        var rdx=tx-f.x, rdy=ty-f.y;
+        if(rdx*rdx+rdy*rdy<5200){ f.roam=Math.random()<.45?null:{x:Math.random()*W,y:H*.12+Math.random()*H*.5}; }
+      }else{
+        tx=b.x+Math.sin(f.t*1.3)*40; ty=b.y-80+Math.cos(f.t*.9)*30;
+        var dx0=tx-f.x, dy0=ty-f.y;
+        if(dx0*dx0+dy0*dy0<2600){ f.hold=1400+Math.random()*2600; }
+      }
+      var dx=tx-f.x, dy=ty-f.y;
+      f.vx=(f.vx+dx*.0022)*.94+Math.sin(f.wob)*.05;
+      f.vy=(f.vy+dy*.0022)*.94+Math.cos(f.wob*1.3)*.05;
+      f.x+=f.vx*dt*.9; f.y+=f.vy*dt*.9;
+      drawFly(ctx,f.x,f.y,Math.atan2(f.vy,f.vx),f.sc||.9,f.wob*4);
+      if(f.hold<=0 && !f.roam && Math.random()<.0009){ f.roam={x:Math.random()*W,y:H*.14+Math.random()*H*.5}; }
+    }
+    for(var m=motes.length-1;m>=0;m--){
+      var p=motes[m]; p.x+=p.vx*dt*.06; p.y+=p.vy*dt*.06; p.a-=.004*dt*.4;
+      if(p.a<=0){ motes.splice(m,1); continue; }
+      ctx.fillStyle="rgba("+p.c+","+p.a.toFixed(2)+")";
+      ctx.beginPath(); ctx.arc(p.x,p.y,1.7,0,6.3); ctx.fill();
+    }
+    if(motes.length>320) motes.splice(0,motes.length-320);
+    requestAnimationFrame(frame);
+  }
+  window.addEventListener("resize",function(){ clearTimeout(window.__rz); window.__rz=setTimeout(resize,180); });
+  resize(); requestAnimationFrame(frame);
+})();
+
+/* ================= POKE THE FLY ================= */
+(function(){
+  var stage=document.getElementById("portStage"), drop=document.getElementById("drop"), pokes=0;
+  function dropCoin(x,y,bud){
+    var d=document.createElement("div"); d.className="coin"+(bud?" bud":"");
+    var W=drop.clientWidth||320, H=drop.clientHeight||320;
+    if(x===undefined){ x=Math.random()*W; y=-20; }
+    d.style.left=(x-13)+"px"; d.style.top=(y-13)+"px"; drop.appendChild(d);
+    var vx=(Math.random()-.5)*7, vy=-4-Math.random()*5, n=0, rot=(Math.random()-.5)*22, px=x-13, py=y-13;
+    (function stp(){
+      n++; vy+=.42; px+=vx; py+=vy;
+      d.style.transform="translate("+(px-(x-13))+"px,"+(py-(y-13))+"px) rotate("+(n*rot)+"deg)";
+      if(n>120||py>H+340){ d.remove(); return; }
+      if(n>100) d.style.opacity=String(1-(n-100)/20);
+      requestAnimationFrame(stp);
+    })();
+  }
+  stage.addEventListener("click",function(e){
+    var r=stage.getBoundingClientRect(), dr=drop.getBoundingClientRect();
+    var x=e.clientX-dr.left, y=e.clientY-dr.top;
+    pokes++;
+    for(var i=0;i<9;i++){ dropCoin(x+(Math.random()-.5)*70, y+(Math.random()-.5)*40, Math.random()<.45); }
+    buzzStart(); buzzSet(.06); setTimeout(function(){ buzzSet(.015); },420);
+    tone(160+Math.random()*40, 520, .16, "square", .05);
+    setTimeout(function(){ tone(880,1320,.1,"triangle",.035); },70);
+    noiseHit(.14,.03);
+    var p=stage.querySelector(".poke");
+    var L=["poke him · he pays","again · he pays again","that is the whole business","he keeps it in the hat","week 14 · still paying","he says this is marketing","quality control, technically"];
+    p.textContent=L[Math.min(pokes,L.length-1)];
+  });
+})();
+
+/* ================= CARDS ================= */
+var CARDS=[
+ ["THE FIRST ROUND","i started at bush one at 4:12 in the morning, because that is when the lamp clicks on and the whole tent smells like it owes me something. by 4:40 i had done eleven flowers and invented a pricing model."],
+ ["THE BEE QUESTION","a bee got in through the vent in march and looked at me for a very long time without saying anything at all. i explained the operation to her twice. she left, and i have chosen to record that as an endorsement."],
+ ["THE WIND","there is a fan in the corner that does my entire job in nine seconds and asks for nothing in return. we do not speak. i schedule the rounds for when it is switched off, so the credit stays clean and undisputed."],
+ ["QUALITY CONTROL","every batch gets tested by me first, personally, in full, which is the reason the harvest numbers and the sales numbers have never once matched on paper. the difference is called overhead and it is not up for discussion."],
+ ["THE HAT","the hat is not a costume, it is management. a fly without a hat gets swatted on sight, a fly with a hat gets asked a question first, and the question is where the entire margin lives."],
+ ["THE LEDGER","i keep the books on a leaf, in pollen, and the leaf lives in the tent, and the tent is humid. every quarter the ledger turns into a smell and i start again from zero. the auditors gave up somewhere around week six."],
+ ["CLIENTELE","two aphids, one confused moth and the extractor fan. the fan pays in air movement, which does not clear on any exchange i am aware of, but it turns up every single day, and around here that counts for a lot."],
+ ["THE HARVEST","week fourteen, eight bushes, every one of them pollinated personally, all of them mine by a logic that has never been written down anywhere. tomorrow i start on unit five, where nobody knows me yet."]
+];
+(function(){
+  var g=document.getElementById("cgrid"), s="";
+  for(var i=0;i<CARDS.length;i++){
+    s+='<div class="card lock" id="card'+i+'"><div class="num">ROUND 0'+(i+1)+'</div><h3>'+CARDS[i][0]+'</h3><p>'+CARDS[i][1]+'</p><div class="seal">POLLINATE BUSH 0'+(i+1)+' TO READ</div></div>';
+  }
+  g.innerHTML=s;
+})();
+function openCard(i){
+  var c=document.getElementById("card"+i);
+  if(c){ c.classList.remove("lock"); c.classList.add("open"); }
+}
+
+/* ================= RAIN ================= */
+function rainDown(n){
+  var host=document.getElementById("rain");
+  for(var i=0;i<n;i++){
+    (function(k){
+      setTimeout(function(){
+        var d=document.createElement("div");
+        d.className="coin"+(Math.random()<.5?" bud":"");
+        d.style.position="absolute";
+        var x=Math.random()*window.innerWidth;
+        d.style.left=x+"px"; d.style.top="-30px";
+        host.appendChild(d);
+        var vy=2+Math.random()*3, rot=(Math.random()-.5)*18, y=-30, nn=0;
+        (function st(){
+          nn++; y+=vy; vy+=.13;
+          d.style.transform="translateY("+y+"px) rotate("+(nn*rot)+"deg)";
+          if(y>window.innerHeight+60){ d.remove(); return; }
+          requestAnimationFrame(st);
+        })();
+      },k*36);
+    })(i);
+  }
+}
+
+/* ================= THE POLLINATION GAME ================= */
+(function(){
+  var cv=document.getElementById("gcv"), ctx=cv.getContext("2d");
+  var hold=cv.parentNode;
+  var W=600,H=600,DPR=1;
+  var running=false, done=0, bad=0, pollen=0, shiftStart=252; /* 04:12 in minutes */
+  var px=300, py=300, fx=300, fy=300, fvx=0, fvy=0, over=false;
+  var prevAng=null, prog=0, lastBadAt=0;
+  var parts=[], blooms=[];
+  var BUSHES=[
+    {x:.26,y:.30,r:112,turns:2,dir:1,  name:"BUSH 01 · BY THE FLAP"},
+    {x:.72,y:.26,r:106,turns:2,dir:-1, name:"BUSH 02 · UNDER THE LAMP"},
+    {x:.78,y:.62,r:100,turns:2,dir:1,  name:"BUSH 03 · THE TALL ONE"},
+    {x:.30,y:.70,r:96, turns:2.5,dir:-1,name:"BUSH 04 · NEXT TO THE FAN"},
+    {x:.52,y:.44,r:88, turns:2.5,dir:1, name:"BUSH 05 · THE FAVOURITE"},
+    {x:.18,y:.52,r:84, turns:3,dir:-1, name:"BUSH 06 · THE LEANER"},
+    {x:.66,y:.80,r:80, turns:3,dir:1,  name:"BUSH 07 · IN THE CORNER"},
+    {x:.46,y:.18,r:74, turns:3,dir:-1, name:"BUSH 08 · THE LAST ROUND"}
+  ];
+  var idx=0;
+
+  function resize(){
+    var r=hold.getBoundingClientRect();
+    DPR=Math.min(2,window.devicePixelRatio||1);
+    W=Math.max(260,r.width); H=Math.max(260,r.height);
+    cv.width=Math.floor(W*DPR); cv.height=Math.floor(H*DPR);
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  window.addEventListener("resize",function(){ clearTimeout(window.__gz); window.__gz=setTimeout(resize,180); });
+
+  function bpos(b){ return {x:b.x*W, y:b.y*H, r:b.r*Math.min(1,W/600)*(W<420?1.06:1)}; }
+
+  function logLine(txt,bad2){
+    var l=document.getElementById("log");
+    var p=document.createElement("p");
+    if(bad2) p.className="bad";
+    p.innerHTML="<b>"+clock()+"</b> "+txt;
+    l.appendChild(p); l.scrollTop=l.scrollHeight;
+    while(l.children.length>40){ l.removeChild(l.firstChild); }
+  }
+  var t0=0;
+  function clock(){
+    if(!t0) return "04:12";
+    var m=shiftStart+Math.floor((Date.now()-t0)/1400)+done*3;
+    var h=Math.floor(m/60)%24, mm=m%60;
+    return (h<10?"0":"")+h+":"+(mm<10?"0":"")+mm;
+  }
+  function buildManifest(){
+    var u=document.getElementById("mani"), s="";
+    for(var i=0;i<BUSHES.length;i++){
+      s+='<li id="mn'+i+'"><span>'+(i<9?"0":"")+(i+1)+'</span> '+BUSHES[i].name.split(" · ")[1]+' <em>'+(BUSHES[i].dir>0?"↻":"↺")+" "+BUSHES[i].turns+" turns"+'</em></li>';
+    }
+    u.innerHTML=s;
+  }
+  function markManifest(){
+    for(var i=0;i<BUSHES.length;i++){
+      var el=document.getElementById("mn"+i); if(!el) continue;
+      el.className = i<idx ? "done" : (i===idx&&running ? "now" : "");
+      if(i<idx){ el.querySelector("em").textContent="POLLINATED"; }
+    }
+  }
+  function hud(){
+    document.getElementById("hDone").textContent=done+"/8";
+    document.getElementById("hPollen").textContent=pollen.toFixed(2)+" g";
+    document.getElementById("hBad").textContent=bad;
+    document.getElementById("hTime").textContent=clock();
+  }
+
+  /* pointer */
+  function pt(e){
+    var r=cv.getBoundingClientRect();
+    var cx=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
+    var cy=(e.touches?e.touches[0].clientY:e.clientY)-r.top;
+    px=cx*(W/r.width); py=cy*(H/r.height); over=true;
+  }
+  cv.addEventListener("pointermove",pt);
+  cv.addEventListener("pointerdown",function(e){ pt(e); ac(); buzzStart(); });
+  cv.addEventListener("pointerleave",function(){ over=false; });
+  cv.addEventListener("touchmove",function(e){ e.preventDefault(); pt(e); },{passive:false});
+
+  function leafletG(g,len,wid){ g.beginPath(); g.moveTo(0,0); g.quadraticCurveTo(wid,-len*.45,0,-len); g.quadraticCurveTo(-wid,-len*.45,0,0); g.fill(); }
+  function gleaf(g,x,y,size,ang,col,alpha){
+    g.save(); g.translate(x,y); g.rotate(ang); g.globalAlpha=alpha; g.fillStyle=col;
+    for(var i=0;i<7;i++){
+      var a=(i-3)*0.36, l=size*(1-Math.abs(i-3)*0.15);
+      g.save(); g.rotate(a); leafletG(g,l,l*.18); g.restore();
+    }
+    g.restore();
+  }
+  function drawBush(p,state,t,pr){
+    var s=p.r/112;
+    ctx.save(); ctx.translate(p.x,p.y);
+    if(state==="now"){
+      var gg=ctx.createRadialGradient(0,0,4,0,0,p.r*1.5);
+      gg.addColorStop(0,"rgba(255,201,60,.16)"); gg.addColorStop(1,"rgba(0,0,0,0)");
+      ctx.fillStyle=gg; ctx.beginPath(); ctx.arc(0,0,p.r*1.5,0,6.3); ctx.fill();
+    }
+    if(state==="done"){
+      var gd=ctx.createRadialGradient(0,0,4,0,0,p.r);
+      gd.addColorStop(0,"rgba(141,255,58,.18)"); gd.addColorStop(1,"rgba(0,0,0,0)");
+      ctx.fillStyle=gd; ctx.beginPath(); ctx.arc(0,0,p.r,0,6.3); ctx.fill();
+    }
+    var col = state==="done" ? "rgba(92,186,54,1)" : state==="now" ? "rgba(54,124,38,1)" : "rgba(32,66,30,1)";
+    var al = state==="dim" ? .45 : .92;
+    var k=Math.sin(t*.0012)*.06;
+    for(var i=0;i<6;i++){
+      var a=i*1.047+k, rr=(16+ (i%3)*9)*s;
+      gleaf(ctx, Math.cos(a)*rr, Math.sin(a)*rr*.8, (34+(i%3)*8)*s, a+1.57, col, al);
+    }
+    gleaf(ctx,0,-6*s,40*s,k,col,al);
+    if(state==="done"){
+      ctx.globalAlpha=.95; ctx.fillStyle="rgba(176,110,235,.85)";
+      for(var b2=0;b2<6;b2++){
+        var aa=b2*1.05+.4;
+        ctx.beginPath(); ctx.ellipse(Math.cos(aa)*20*s,Math.sin(aa)*17*s,6*s,9*s,aa,0,6.3); ctx.fill();
+      }
+      ctx.globalAlpha=1;
+    }
+    ctx.restore();
+  }
+  function drawRing(p,b,t){
+    ctx.save(); ctx.translate(p.x,p.y);
+    ctx.strokeStyle="rgba(141,255,58,.16)"; ctx.lineWidth=8;
+    ctx.beginPath(); ctx.arc(0,0,p.r,0,6.3); ctx.stroke();
+    ctx.setLineDash([4,9]); ctx.lineWidth=1; ctx.strokeStyle="rgba(141,255,58,.28)";
+    ctx.beginPath(); ctx.arc(0,0,p.r*.5,0,6.3); ctx.stroke();
+    ctx.beginPath(); ctx.arc(0,0,p.r*1.34,0,6.3); ctx.stroke();
+    ctx.setLineDash([]);
+    var full=b.turns*6.2831853, f=Math.min(1,prog/full);
+    ctx.strokeStyle="#ffc93c"; ctx.lineWidth=9; ctx.lineCap="round";
+    ctx.beginPath(); ctx.arc(0,0,p.r,-1.5708,-1.5708+6.2831853*f*b.dir,b.dir<0); ctx.stroke();
+    var aa=t*.0016*b.dir;
+    for(var i=0;i<3;i++){
+      var an=aa+i*2.094;
+      ctx.save(); ctx.rotate(an); ctx.translate(p.r,0); ctx.rotate(1.5708*b.dir);
+      ctx.fillStyle="rgba(255,201,60,.8)";
+      ctx.beginPath(); ctx.moveTo(0,-8); ctx.lineTo(7,0); ctx.lineTo(0,8); ctx.closePath(); ctx.fill();
+      ctx.restore();
+    }
+    ctx.restore();
+  }
+  function drawGFly(x,y,ang,w){
+    var g=ctx;
+    g.save(); g.translate(x,y); g.rotate(ang); g.scale(1.25,1.25);
+    g.globalAlpha=.6; g.fillStyle="rgba(220,240,255,.6)";
+    var wv=Math.sin(w)*.6;
+    g.save(); g.rotate(-.5+wv); g.beginPath(); g.ellipse(-2,-6,11,4.4,0,0,6.3); g.fill(); g.restore();
+    g.save(); g.rotate(.5-wv); g.beginPath(); g.ellipse(-2,6,11,4.4,0,0,6.3); g.fill(); g.restore();
+    g.globalAlpha=1;
+    g.fillStyle="#0c1c12"; g.beginPath(); g.ellipse(0,0,10,6,0,0,6.3); g.fill();
+    g.fillStyle="#16412a"; g.beginPath(); g.ellipse(8,0,4.6,4.4,0,0,6.3); g.fill();
+    g.fillStyle="#ff3ce0"; g.beginPath(); g.arc(10,-2.4,2.1,0,6.3); g.fill(); g.beginPath(); g.arc(10,2.4,2.1,0,6.3); g.fill();
+    g.fillStyle="#3f6b1f"; g.beginPath(); g.ellipse(2,-5.4,5,2.6,-.5,0,6.3); g.fill();
+    g.restore();
+  }
+
+  function finishBush(){
+    var b=BUSHES[idx], p=bpos(b);
+    done++; pollen+=0.31+Math.random()*.2;
+    for(var i=0;i<26;i++){
+      parts.push({x:p.x+(Math.random()-.5)*60,y:p.y+(Math.random()-.5)*60,vx:(Math.random()-.5)*3,vy:-1-Math.random()*2.4,a:1,c:Math.random()<.5?"141,255,58":"176,110,235",r:2+Math.random()*2});
+    }
+    openCard(idx);
+    logLine(BUSHES[idx].name.split(" · ")[1].toLowerCase()+" pollinated. <b>+"+(0.31).toFixed(2)+"g</b> on his back.");
+    tone(523,784,.16,"triangle",.05);
+    setTimeout(function(){ tone(659,988,.2,"sine",.045); },110);
+    setTimeout(function(){ noiseHit(.2,.03); },60);
+    idx++; prog=0; prevAng=null;
+    markManifest(); hud();
+    if(idx>=BUSHES.length){ winShift(); }
+    else{
+      document.getElementById("gHint").textContent = BUSHES[idx].name+" · swirl "+(BUSHES[idx].dir>0?"clockwise ↻":"counter-clockwise ↺")+" · "+BUSHES[idx].turns+" turns";
+    }
+  }
+  function winShift(){
+    running=false; buzzSet(0);
+    document.getElementById("win").classList.add("on");
+    rainDown(70);
+    var seq=[523,659,784,1046];
+    for(var i=0;i<seq.length;i++){ (function(k){ setTimeout(function(){ tone(seq[k],seq[k]*1.5,.25,"triangle",.05); },k*140); })(i); }
+    logLine("shift complete. eight for eight. <b>he is calling it his</b>.");
+    document.getElementById("gHint").textContent="all eight done. the room is technically his now.";
+  }
+
+  var lastT=0;
+  function loop(t){
+    if(!lastT) lastT=t;
+    var dt=Math.min(40,t-lastT); lastT=t;
+    if(document.hidden){ requestAnimationFrame(loop); return; }
+    ctx.clearRect(0,0,W,H);
+    var bg=ctx.createLinearGradient(0,0,0,H);
+    bg.addColorStop(0,"#08150c"); bg.addColorStop(1,"#040c07");
+    ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle="rgba(141,255,58,.05)"; ctx.lineWidth=1;
+    for(var gx=0;gx<W;gx+=40){ ctx.beginPath(); ctx.moveTo(gx,0); ctx.lineTo(gx,H); ctx.stroke(); }
+    for(var gy=0;gy<H;gy+=40){ ctx.beginPath(); ctx.moveTo(0,gy); ctx.lineTo(W,gy); ctx.stroke(); }
+
+    for(var i=0;i<BUSHES.length;i++){
+      var p=bpos(BUSHES[i]);
+      drawBush(p, i<idx?"done":(i===idx&&running?"now":"dim"), t, 0);
+    }
+    if(running && idx<BUSHES.length){
+      var b=BUSHES[idx], pp=bpos(b);
+      drawRing(pp,b,t);
+
+      /* fly follows cursor */
+      var dx=px-fx, dy=py-fy;
+      fvx=(fvx+dx*.05)*.78; fvy=(fvy+dy*.05)*.78;
+      fx+=fvx; fy+=fvy;
+
+      var rx=fx-pp.x, ry=fy-pp.y, dist=Math.sqrt(rx*rx+ry*ry);
+      var inBand = dist>pp.r*0.46 && dist<pp.r*1.36;
+      var ang=Math.atan2(ry,rx);
+      if(inBand && over){
+        if(prevAng!==null){
+          var d=ang-prevAng;
+          while(d>Math.PI) d-=6.2831853;
+          while(d<-Math.PI) d+=6.2831853;
+          if(Math.abs(d)<1.2){
+            if(d*b.dir>0){
+              prog+=Math.abs(d);
+              pollen+=Math.abs(d)*0.004;
+              if(Math.random()<.5){
+                parts.push({x:fx,y:fy,vx:(Math.random()-.5)*.8,vy:-.3-Math.random()*.6,a:1,c:Math.random()<.6?"255,201,60":"141,255,58",r:1.6+Math.random()*1.4});
+              }
+              buzzSet(.03+Math.min(.05,Math.abs(d)*1.4));
+            }else if(Math.abs(d)>0.05){
+              prog=Math.max(0,prog-Math.abs(d)*1.5);
+              if(t-lastBadAt>900){
+                lastBadAt=t; bad++;
+                logLine("wrong way round "+BUSHES[idx].name.split(" · ")[1].toLowerCase()+". <b>pollen came off</b>.",1);
+                tone(200,90,.16,"sawtooth",.035);
+              }
+            }
+          }
+        }
+        prevAng=ang;
+      }else{
+        prevAng=null;
+        prog=Math.max(0,prog-0.0016*dt);
+        buzzSet(.012);
+      }
+      if(prog>=b.turns*6.2831853){ finishBush(); }
+      hud();
+
+      /* cursor fly */
+      drawGFly(fx,fy,Math.atan2(fvy,fvx),t*.05);
+      if(!over){
+        ctx.fillStyle="rgba(255,201,60,.75)"; ctx.font="11px JetBrains Mono, monospace"; ctx.textAlign="center";
+        ctx.fillText("move the cursor over the tent", W/2, H*.12);
+      }
+    }
+    for(var m=parts.length-1;m>=0;m--){
+      var q=parts[m]; q.x+=q.vx; q.y+=q.vy; q.vy+=.014; q.a-=.012;
+      if(q.a<=0){ parts.splice(m,1); continue; }
+      ctx.fillStyle="rgba("+q.c+","+q.a.toFixed(2)+")";
+      ctx.beginPath(); ctx.arc(q.x,q.y,q.r,0,6.3); ctx.fill();
+    }
+    requestAnimationFrame(loop);
+  }
+
+  document.getElementById("gGo").addEventListener("click",function(){
+    document.getElementById("gStart").classList.add("off");
+    running=true; idx=0; done=0; bad=0; pollen=0; prog=0; prevAng=null; t0=Date.now();
+    fx=W*.5; fy=H*.5; px=fx; py=fy;
+    resize(); markManifest(); hud();
+    ac(); buzzStart(); buzzSet(.02);
+    logLine("shift started. <b>bush 01</b>, clockwise, two turns.");
+    document.getElementById("gHint").textContent=BUSHES[0].name+" · swirl clockwise ↻ · 2 turns";
+    tone(330,660,.18,"square",.04);
+  });
+  document.getElementById("winClose").addEventListener("click",function(){
+    document.getElementById("win").classList.remove("on");
+  });
+
+  if(("ontouchstart" in window) && window.matchMedia("(max-width:1000px)").matches){
+    document.querySelector("#gStart p").textContent="drag your finger on the tent — the fly follows it. swirl him around each bush, the way the arrow points, until the ring closes. eight bushes and the harvest is yours.";
+    document.getElementById("gHint").textContent="drag in circles around the bush, following the arrow, until the ring fills";
+  }
+  buildManifest(); resize(); hud(); requestAnimationFrame(loop);
+})();
+
+})();
+</script>
+</body>
+</html>
