@@ -39,19 +39,9 @@ h1,h2,h3{margin:0}
 .scan{background:repeating-linear-gradient(rgba(0,0,0,.16) 0 1px,transparent 1px 4px); opacity:.5}
 #wrap{position:relative; z-index:3}
 
-/* ---------- gate ---------- */
-#gate{position:fixed; inset:0; z-index:200; background:#030905; display:flex; align-items:center; justify-content:center; text-align:center; cursor:pointer; transition:opacity .5s}
-#gate.off{opacity:0; pointer-events:none}
-.gatebox{padding:26px}
-.gate-k{font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.34em; color:var(--lime); opacity:.7}
-.gate-t{font-family:"Shrikhand",serif; font-size:clamp(38px,9vw,84px); color:var(--lime2); line-height:.95; margin:16px 0 10px; text-shadow:0 0 32px rgba(141,255,58,.35), 5px 5px 0 rgba(166,60,255,.55)}
-.gate-s{color:var(--dim); font-size:14px; max-width:430px; margin:0 auto}
-.gate-b{display:inline-block; margin-top:22px; font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:.3em; color:var(--ink); background:var(--lime); padding:12px 22px; border-radius:999px; animation:pulseg 1.6s infinite}
-@keyframes pulseg{0%,100%{box-shadow:0 0 0 0 rgba(141,255,58,.5)}50%{box-shadow:0 0 0 16px rgba(141,255,58,0)}}
-.gatefly{position:absolute; width:9px; height:9px; border-radius:50%; background:#0c1a10; box-shadow:0 0 7px rgba(255,60,224,.5)}
-
 /* ---------- topbar ---------- */
 .ticker{position:relative; z-index:6; border-bottom:1px solid var(--edge); background:rgba(4,14,8,.86); overflow:hidden; backdrop-filter:blur(4px)}
+.ticker{-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent 97%); mask-image:linear-gradient(90deg,#000 82%,transparent 97%)}
 .ticker div{display:inline-block; white-space:nowrap; padding:7px 0; font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.2em; color:var(--lime); animation:mq 34s linear infinite}
 @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .ticker b{color:var(--mag); font-weight:400}
@@ -173,8 +163,8 @@ footer{padding:56px 0 40px; text-align:center}
 .flinks{display:flex; gap:12px; justify-content:center; margin-top:18px; flex-wrap:wrap}
 
 /* ---------- audio controls ---------- */
-.actrl{position:fixed; right:14px; bottom:14px; z-index:120; display:flex; gap:8px}
-.actrl button{font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.18em; color:var(--lime2); background:rgba(5,16,9,.9); border:1px solid var(--edge); border-radius:999px; padding:8px 13px; cursor:pointer}
+.actrl{position:fixed; right:10px; top:3px; z-index:130; display:flex; gap:6px}
+.actrl button{font-family:"JetBrains Mono",monospace; font-size:9px; letter-spacing:.14em; color:var(--lime2); background:rgba(5,16,9,.94); border:1px solid var(--edge); border-radius:999px; padding:5px 10px; cursor:pointer}
 .actrl button.on{background:var(--lime); color:var(--ink); border-color:var(--lime)}
 
 /* ---------- win ---------- */
@@ -217,7 +207,7 @@ footer{padding:56px 0 40px; text-align:center}
   .cgrid{grid-template-columns:1fr}
   .hud div{flex:1 1 44%}
   .log{height:150px}
-  .actrl{left:10px; bottom:10px}
+  .actrl{right:8px; top:3px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
 </style>
@@ -228,15 +218,6 @@ footer{padding:56px 0 40px; text-align:center}
 <div class="film scan"></div>
 <div class="film grain"></div>
 <div class="film vig"></div>
-
-<div id="gate">
-  <div class="gatebox">
-    <div class="gate-k">UNIT 04 · LIGHTS ARE ON · SOMEONE IS IN THERE</div>
-    <div class="gate-t">DRUG FLY</div>
-    <div class="gate-s">he does the rounds at four in the morning and he does not like being watched. open the flap anyway.</div>
-    <div class="gate-b">CLICK TO ENTER THE TENT</div>
-  </div>
-</div>
 
 <div id="wrap">
 
@@ -481,30 +462,18 @@ var TKL=["UNIT 04","LIGHTS 24/7","every bush pollinated by hand","he has no hand
   document.getElementById("tk").innerHTML=s+" ";
 })();
 
-/* ================= GATE ================= */
-var gate=document.getElementById("gate"), opened=false;
-for(var gf=0; gf<9; gf++){
-  (function(n){
-    var e=document.createElement("div"); e.className="gatefly";
-    e.style.left=(8+Math.random()*84)+"%"; e.style.top=(10+Math.random()*80)+"%";
-    gate.appendChild(e);
-    var t=Math.random()*6.28;
-    setInterval(function(){
-      t+=.06+n*.004;
-      e.style.transform="translate("+(Math.sin(t*1.7)*46)+"px,"+(Math.cos(t*1.1)*30)+"px)";
-    },40);
-  })(gf);
-}
-function openGate(){
-  if(opened) return; opened=true;
-  gate.classList.add("off");
-  setTimeout(function(){ gate.style.display="none"; },520);
-  ac(); buzzStart(); buzzSet(.02);
-  tone(90,260,.5,"sawtooth",.05); setTimeout(function(){ tone(330,660,.22,"square",.04); },160);
+/* ============= FIRST INTERACTION STARTS AUDIO ============= */
+var audioKicked=false;
+function kickAudio(){
+  if(audioKicked) return; audioKicked=true;
+  ac(); buzzStart(); buzzSet(.018);
+  tone(90,260,.45,"sawtooth",.045);
+  setTimeout(function(){ tone(330,660,.2,"square",.035); },160);
   musToggle(true);
 }
-gate.addEventListener("click",openGate);
-setTimeout(openGate,25000);
+["pointerdown","keydown","touchstart"].forEach(function(ev){
+  document.addEventListener(ev,kickAudio,{once:false,passive:true});
+});
 
 /* ================= BACKGROUND: THE TENT ================= */
 (function(){
